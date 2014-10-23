@@ -477,10 +477,40 @@ void Tesselator::ExportShapeToJSON(char * filename)
 }
 
 //---------------------------------------------------------------------------
-float* Tesselator::VerticesList()
+std::vector<std::vector<float> > Tesselator::VerticesList()
 {
-  return locVertexcoord;
+  std::vector<std::vector<float> > v;
+  v.resize(tot_vertex_count);
+  std::vector<float> vv;
+  vv.resize(3);
+  for (int i = 0; i < tot_vertex_count; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      vv[j] = locVertexcoord[i * 3 + j];
+    }
+    v[i] = vv;
+  }
+  return v;
 }
+
+std::vector<std::vector<int> > Tesselator::TriangleList()
+{
+  std::vector<std::vector<int> > v;
+  v.resize(tot_triangle_count);
+  std::vector<int> vv;
+  vv.resize(3);
+  for (int i = 0; i < tot_triangle_count; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      vv[j] = loc_tri_indexes[i * 3 + j];
+    }
+    v[i] = vv;
+  }
+  return v;
+}
+
 //---------------------------------------------------------------------------
 float* Tesselator::NormalsList()
 {

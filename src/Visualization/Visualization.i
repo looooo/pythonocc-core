@@ -25,6 +25,14 @@
 %}
 
 %include ../SWIG_files/common/ExceptionCatcher.i
+%include "std_vector.i"
+
+namespace std {
+   %template(FloatVector) vector<float>;
+   %template(IntVector) vector<int>;
+   %template(CoordVector) vector<vector<float> >;
+   %template(TriVector) vector<vector<int> >;
+}
 
 %typemap(out) float [ANY] {
   int i;
@@ -56,7 +64,8 @@ class Tesselator {
                float aScaleV,
                float aRotationAngle);
     Tesselator(TopoDS_Shape aShape);
-	float* VerticesList();
+    std::vector<std::vector<float> > VerticesList();
+    std::vector<std::vector<int> > TriangleList();
 	int ObjGetTriangleCount();
 	int ObjGetVertexCount();
 	int ObjGetNormalCount();

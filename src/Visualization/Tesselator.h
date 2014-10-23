@@ -94,7 +94,8 @@ Standard_EXPORT class Tesselator
       void JoinPrimitives();
       void JoinPrimitivesWithUVCoords();
       void SetDeviation(Standard_Real aDeviation);
-      float* VerticesList();
+      std::vector<std::vector<float> > VerticesList();
+      std::vector<std::vector<int> >  TriangleList();
       float* NormalsList();
       float* TextureCoordinatesList();
       void ExportShapeToJSON(char *filename);
